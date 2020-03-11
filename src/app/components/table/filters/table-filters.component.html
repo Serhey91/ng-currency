@@ -1,0 +1,15 @@
+<div class="filters-container">
+  <mat-form-field>
+    <mat-label>Date from</mat-label>
+    <input matInput [matDatepicker]="myDatepicker">
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Date to</mat-label>
+    <input matInput [matDatepicker]="myDatepicker2">
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker2></mat-datepicker>
+  </mat-form-field>
+  <button mat-stroked-button class='load-btn'>Download</button>
+</div>

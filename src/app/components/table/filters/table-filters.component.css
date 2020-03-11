@@ -1,0 +1,13 @@
+:host {
+  position: relative;
+}
+
+.filters-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.load-btn {
+  align-self: center;
+  padding: 0 32px;
+}

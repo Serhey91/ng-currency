@@ -1,0 +1,30 @@
+:host {
+  position: relative;
+}
+
+table {
+  width: 100%;
+  box-shadow: none;
+}
+
+table th, table td {
+  text-align: center;
+  border:2px solid rgba(169, 169, 169, 0.8)
+}
+
+th.mat-sort-header-sorted {
+  color: black;
+}
+
+.bg-gray {
+  background-color: rgb(195, 195, 195);
+  font-weight: bold;
+  font-size: 1.3em;
+  color: black;
+}
+
+table .table-data {
+  padding: 0;
+}
+
+
