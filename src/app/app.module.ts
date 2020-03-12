@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderController } from './components/header/header.component';
 import { TableController } from './components/table/table.component';
 
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 import { TableViewController } from './components/table/view/table-view.component';
 import { TableFiltersController } from './components/table/filters/table-filters.component';
 import { MatTableModule } from '@angular/material/table';
@@ -16,6 +16,11 @@ import { MatFormFieldModule} from '@angular/material/form-field';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatInputModule } from '@angular/material/input'
 import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatProgressSpinnerModule } from '@angular/material';
+import { HttpClientModule } from '@angular/common/http';
+import { CurrencyService } from './shared/currency.service';
+import { DBService } from './shared/db.service';
 
 @NgModule({
   declarations: [
@@ -35,9 +40,12 @@ import { MatButtonModule } from '@angular/material/button';
     MatFormFieldModule,
     MatNativeDateModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    FormsModule,
+    MatProgressSpinnerModule,
+    HttpClientModule
   ],
-  providers: [MatNativeDateModule],
+  providers: [MatNativeDateModule, CurrencyService, DBService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,15 +1,56 @@
-<div class="filters-container">
-  <mat-form-field>
-    <mat-label>Date from</mat-label>
-    <input matInput [matDatepicker]="myDatepicker">
-    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
-    <mat-datepicker #myDatepicker></mat-datepicker>
-  </mat-form-field>
-  <mat-form-field>
-    <mat-label>Date to</mat-label>
-    <input matInput [matDatepicker]="myDatepicker2">
-    <mat-datepicker-toggle matSuffix [for]="myDatepicker2"></mat-datepicker-toggle>
-    <mat-datepicker #myDatepicker2></mat-datepicker>
-  </mat-form-field>
-  <button mat-stroked-button class='load-btn'>Download</button>
+<div>
+  <form
+    (ngSubmit)='onSubmit(filtersForm)'
+    #filtersForm='ngForm'
+    class="filters-container"
+    autocomplete="off"
+  >
+    <mat-form-field>
+      <input
+        placeholder='Date from'
+        matInput
+        [matDatepicker]='dateStart'
+        ngModel
+        required
+        name='dateFrom'
+        #dateFrom='ngModel'
+        #dateFrom
+        [max]='currentDate'
+      >
+      <mat-datepicker-toggle matSuffix [for]='dateStart'></mat-datepicker-toggle>
+      <mat-datepicker #dateStart></mat-datepicker>
+      <mat-error>Date start is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input
+        placeholder='Date to'
+        matInput
+        [max]='maxDate'
+        [min]='minDate'
+        [matDatepicker]='dateEnd'
+        ngModel
+        required
+        name='dateTo'
+        #dateTo='ngModel'
+        #dateTo
+      >
+      <mat-datepicker-toggle matSuffix [for]='dateEnd'></mat-datepicker-toggle>
+      <mat-datepicker #dateEnd></mat-datepicker>
+      <mat-error>Date end should be max five days from start</mat-error>
+    </mat-form-field>
+    <button
+      class='load-btn'
+      type='submit'
+      [disabled]='filtersForm.invalid'
+      mat-raised-button
+      color='primary'
+      >
+      <span
+        *ngIf="!isLoading"
+      >Get currency</span>
+      <mat-spinner *ngIf="isLoading" [color]="'warn'"  diameter="25" style='margin: 4px auto'></mat-spinner>
+    </button>
+
+  </form>
 </div>

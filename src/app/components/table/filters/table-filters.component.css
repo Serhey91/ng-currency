@@ -1,13 +1,17 @@
 :host {
   position: relative;
+
 }
 
 .filters-container {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 2em;
 }
 
 .load-btn {
   align-self: center;
   padding: 0 32px;
+  width: 150px;
+  height: 40px;
 }
