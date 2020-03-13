@@ -1,22 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'}
-];
-
+import { CurrencyTableView, CurrencyItem } from 'src/app/models/currency.model';
+import { CurrencyService } from 'src/app/shared/currency.service';
 
 @Component({
   selector: 'app-currency-table-view',
@@ -24,12 +10,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
   styleUrls: ['./table-view.component.css']
 })
 export class TableViewController implements OnInit{
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  displayedColumns: string[] = ['date'];
+  dataSource: CurrencyTableView[];
+  // todo add subscription and onDestroy
 
+  // @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+  constructor(private currencyService: CurrencyService) {
+
+  }
   ngOnInit() {
-    this.dataSource.sort = this.sort;
+    this.displayedColumns = [...this.displayedColumns, ...this.currencyService.getCurrencyItems()];
+    this.currencyService.currencySubject.subscribe((currency: CurrencyItem[]) => {
+      this.dataSource = this.createTableView([...currency]);
+    })
+    // this.dataSource.sort = this.sort;
+  }
+
+  private createTableView(items: CurrencyItem[]): CurrencyTableView[] {
+    const transferedItems = items.map((i:CurrencyItem) => ({date: i.date, [i.name]: i.rate}));
+    const days: string[] = [...new Set(transferedItems.map(i => i.date))];
+    const tableView: CurrencyTableView[] = days.map((day:string) => {
+      const filteredItemsPerDay: CurrencyTableView[] = transferedItems.filter(item => item.date === day);
+      return {...filteredItemsPerDay.reduce((prev: CurrencyTableView, next: CurrencyTableView) => ({...prev, ...next}), {date: ''})}
+    })
+    console.log(tableView);
+    return tableView;
+    // const currencyFIlters = this.currencyService.getCurrencyItems();
+//     0: CurrencyItem {date: "13.03.2020", rate: 32.7466, name: "GBP"}
+// 1: CurrencyItem {date: "13.03.2020", rate: 25.858, name: "USD"}
+// 2: CurrencyItem {date: "13.03.2020", rate: 29.054, name: "EUR"}
+    // return currencyFIlters.map((currencyName: string) => {
+    //   return {
+    //     [currencyName]: items.filter((c: CurrencyItem) => c.name === currencyName)
+    //   }
+    // })
   }
 }

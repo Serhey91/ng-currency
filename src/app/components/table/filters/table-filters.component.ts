@@ -14,6 +14,7 @@ export class TableFiltersController implements OnInit, AfterContentChecked{
   maxDate: Date;
   minDate: Date;
   currentDate: Date;
+  // TODO add subscription
   constructor(
     private dbService: DBService
   ) {
@@ -25,14 +26,14 @@ export class TableFiltersController implements OnInit, AfterContentChecked{
 
   onSubmit(form: NgForm): void {
     this.isLoading = true;
-    this.dbService.fetchCurrency().subscribe((data) => {
-      console.log(data);
+    console.log(form)
+    this.dbService.fetchCurrency(form.value.dateFrom, form.value.dateTo).subscribe((data) => {
       this.isLoading = false;
     })
   }
 
   ngAfterContentChecked() {
-    // TODO - think about days in the future
+    // TODO - think about days in the future for the dateEnd
     if (this.dateFromEl.nativeElement.value) {
       this.minDate = new Date(this.dateFromEl.nativeElement.value);
       const currentDateFrom = new Date(this.dateFromEl.nativeElement.value).getTime();
