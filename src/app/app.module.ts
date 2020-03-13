@@ -7,18 +7,18 @@ import { MaterialModule } from './shared/material.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
-import { TableController } from './components/table/table.component';
-import { TableViewController } from './components/table/view/table-view.component';
-import { TableFiltersController } from './components/table/filters/table-filters.component';
-import { HeaderController } from './components/header/header.component';
+import { TableComponent } from './components/table/table.component';
+import { TableViewComponent } from './components/table/view/table-view.component';
+import { TableFiltersComponent } from './components/table/filters/table-filters.component';
+import { HeaderComponent } from './components/header/header.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderController,
-    TableController,
-    TableViewController,
-    TableFiltersController
+    HeaderComponent,
+    TableComponent,
+    TableViewComponent,
+    TableFiltersComponent
   ],
   imports: [
     BrowserModule,

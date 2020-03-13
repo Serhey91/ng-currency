@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef } from "@angular/core";
+import { Component, OnInit, ViewChild, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { CurrencyTableView, CurrencyItem } from 'src/app/models/currency.model';
@@ -11,10 +11,10 @@ import { Subscription } from 'rxjs';
   templateUrl: './table-view.component.html',
   styleUrls: ['./table-view.component.css']
 })
-export class TableViewController implements OnInit, OnDestroy {
+export class TableViewComponent implements OnInit, OnDestroy {
   displayedColumns: string[] = ['date'];
   dataSource: MatTableDataSource<CurrencyTableView>;
-  isLoad: boolean = false;
+  isLoad = false;
 
   private loaderSubscription: Subscription;
   private currencySubscription: Subscription;
@@ -37,7 +37,7 @@ export class TableViewController implements OnInit, OnDestroy {
     }, (error) => {
       this.loaderService.showSnackBar(error, 'Error', 3000);
       this.loaderService.setLoader(false);
-    })
+    });
 
     this.displayedColumns = [...this.displayedColumns, ...this.currencyService.getCurrencyItems()];
     this.currencySubscription = this.currencyService.currency$.subscribe((currency: CurrencyItem[]) => {
@@ -50,15 +50,15 @@ export class TableViewController implements OnInit, OnDestroy {
   }
 
   private createTableView(items: CurrencyItem[]): MatTableDataSource<CurrencyTableView> {
-    const transferedItems = items.map((i:CurrencyItem) => ({date: i.date, [i.name]: i.rate}));
+    const transferedItems = items.map((i: CurrencyItem) => ({date: i.date, [i.name]: i.rate}));
 
     const days: string[] = [...new Set(transferedItems.map(i => i.date))];
 
-    const tableView: CurrencyTableView[] = days.map((day:string) => {
+    const tableView: CurrencyTableView[] = days.map((day: string) => {
       const filteredItemsPerDay: CurrencyTableView[] = transferedItems.filter(item => item.date === day);
-      return {...filteredItemsPerDay.reduce((prev: CurrencyTableView, next: CurrencyTableView) => ({...prev, ...next}), {date: ''})}
-    })
-    return new MatTableDataSource(tableView)
+      return {...filteredItemsPerDay.reduce((prev: CurrencyTableView, next: CurrencyTableView) => ({...prev, ...next}), {date: ''})};
+    });
+    return new MatTableDataSource(tableView);
   }
 
   private detectChanges() {

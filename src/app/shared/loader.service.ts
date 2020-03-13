@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs';
 import { MatSnackBar } from '@angular/material';
 
@@ -6,12 +6,12 @@ import { MatSnackBar } from '@angular/material';
   providedIn: 'root'
 })
 export class LoaderService {
-  private isLoaded: boolean = false;
+  private isLoaded = false;
 
   loader$: Subject<boolean> = new Subject<boolean>();
 
   constructor(
-    private matSnackBar:MatSnackBar
+    private matSnackBar: MatSnackBar,
   ) {
   }
 
@@ -25,6 +25,6 @@ export class LoaderService {
   }
 
   showSnackBar(method, action, duration) {
-    this.matSnackBar.open(method, action, {duration})
+    this.matSnackBar.open(method, action, {duration});
   }
 }

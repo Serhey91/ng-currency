@@ -1,4 +1,4 @@
-import { Injectable } from "@angular/core";
+import { Injectable } from '@angular/core';
 import { ICurrency, CurrencyItem } from '../models/currency.model';
 import { Subject } from 'rxjs';
 
@@ -9,11 +9,11 @@ export class CurrencyService {
   private localCurrency: CurrencyItem[];
   private EXPECTED_CURRENCY: string[] = ['EUR', 'USD', 'GBP'];
 
-  currency$: Subject<CurrencyItem[]> = new Subject<CurrencyItem[]>()
+  currency$: Subject<CurrencyItem[]> = new Subject<CurrencyItem[]>();
 
   constructor() {}
 
-  getCurrency():CurrencyItem[] {
+  getCurrency(): CurrencyItem[] {
     return [...this.localCurrency];
   }
 

@@ -15,4 +15,4 @@ interface ICurrencyView {
   [key: string]: number|string;
 }
 
-export type CurrencyTableView = ICurrencyView & {date: string}
+export type CurrencyTableView = ICurrencyView & {date: string};
