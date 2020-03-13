@@ -44,12 +44,12 @@
       type='submit'
       mat-raised-button
       color='primary'
+      [disabled]='filtersForm.invalid'
       >
-      <!-- [disabled]='filtersForm.invalid' -->
       <span
-        *ngIf="!isLoading"
+        *ngIf="!isLoad"
       >Get currency</span>
-      <mat-spinner *ngIf="isLoading" [color]="'warn'"  diameter="25" style='margin: 4px auto'></mat-spinner>
+      <mat-spinner *ngIf="isLoad" [color]="'warn'" diameter="25" style='margin: 4px auto'></mat-spinner>
     </button>
 
   </form>

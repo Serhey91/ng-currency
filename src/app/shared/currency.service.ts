@@ -2,11 +2,14 @@ import { Injectable } from "@angular/core";
 import { ICurrency, CurrencyItem } from '../models/currency.model';
 import { Subject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class CurrencyService {
   private localCurrency: CurrencyItem[];
   private EXPECTED_CURRENCY: string[] = ['EUR', 'USD', 'GBP'];
-  currencySubject: Subject<CurrencyItem[]> = new Subject<CurrencyItem[]>()
+
+  currency$: Subject<CurrencyItem[]> = new Subject<CurrencyItem[]>()
 
   constructor() {}
 
@@ -16,7 +19,7 @@ export class CurrencyService {
 
   setCurrency(currencyArray: CurrencyItem[]): void {
     this.localCurrency = currencyArray;
-    this.currencySubject.next([...this.localCurrency]);
+    this.currency$.next([...this.localCurrency]);
   }
 
   getCurrencyItems(): string[] {

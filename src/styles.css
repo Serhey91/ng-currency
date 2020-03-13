@@ -2,3 +2,10 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.mat-snack-bar-container {
+  max-width: 80vw;
+}
+.bg-gray div {
+  display: flex;
+  justify-content: center;
+}
